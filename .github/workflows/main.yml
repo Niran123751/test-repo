@@ -1,0 +1,25 @@
+name: CI with Cache
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: prime-cache-134b8ba
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.npm
+            ~/.cache
+          key: cache-134b8ba
+
+      - name: Show cache result
+        run: echo "Cache step finished. Check previous step for hit/miss."
